@@ -90,7 +90,7 @@ class ShufflerTest {
   }
 
   @Test
-  <T> void shuffleGeneric() {
+  void shuffleGeneric() {
     Integer[] deckOne = {1,2,3,4,5,6,7,8,9,10};
     Integer[] deckTwo = Arrays.copyOf(deckOne, deckOne.length);
     Shuffler.shuffle(deckOne);
