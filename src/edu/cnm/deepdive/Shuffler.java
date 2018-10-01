@@ -1,17 +1,31 @@
 package edu.cnm.deepdive;
 
+import java.util.Arrays;
 import java.util.Random;
+
 
 public class Shuffler {
 
   public static final int DECK_SIZE = 52;
   private int[] deckThree = new int[DECK_SIZE];
+  private Random rng = new Random();
 
   public static void main(String[] args) {
     Shuffler theShuffler = new Shuffler();
     theShuffler.fillThirdDeck();
     theShuffler.shuffleDeckInPlace(DECK_SIZE - 1);
     theShuffler.printDeckThree();
+    int[] deck = new int[DECK_SIZE];
+    for (int i = 0; i < deck.length; i++) {
+      deck[i] = i+1;
+    }
+    System.out.println(Arrays.toString(deck));
+    shuffle(deck);
+    System.out.println(Arrays.toString(deck));
+    String[] names = {"heeeellllooo", "hiya", "hola", "howdy", "hi", "guten tag"};
+    System.out.println(Arrays.toString(names));
+    shuffle(names);
+    System.out.println(Arrays.toString(names));
   }
 
 
@@ -112,6 +126,20 @@ public class Shuffler {
     shuffle(deck, new Random());
   }
 
+  public static <T> void shuffle(T[] deck, Random rng){
+    for (int i = deck.length - 1; i > 0; i--) {
+      int swap = rng.nextInt(i + 1);
+      T temp = deck[swap];
+      deck[swap] = deck[i];
+      deck[i] = temp;
+    }
+  }
+
+  public static <T> void shuffle(T[] deck) {
+    shuffle(deck, new Random());
+  }
+
+
   private void printDeckThree() {
     for (int i = 0; i < DECK_SIZE; i++) {
       System.out.print(" " + deckThree[i]);
@@ -129,7 +157,6 @@ public class Shuffler {
   }
 
   private void swap(int position) {
-    Random rng = new Random();
     int secondPosition = rng.nextInt(position);
     int tempPosVal = deckThree[position];
     deckThree[position] = deckThree[secondPosition];
